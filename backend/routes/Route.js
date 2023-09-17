@@ -3,7 +3,6 @@ const Router = express.Router();
 import Usermodel from "../models/UserModel.js";
 import { products } from "../constants/data.js";
 import MyModel from "../models/ProductModel.js";
-import useParams from "react"
 
 Router.post('/signup',async(req,res)=>{
 
@@ -55,17 +54,29 @@ Router.get("/products",async (req, res)=>{
 })
 
 
-Router.get("/products/:id",async(req,res)=>{
-   try{
-    const id = req.params.id;
-    const data=  await MyModel.findOne({"id":id})
-    res.status(200).json(data)
-   }
-   catch(err){
-  res.status(500).send(err.message);
+// Router.get("/products/:id",async(req,res)=>{
+//    try{
+//     const id = req.params.id;
+//     const data=  await MyModel.findOne({"id":id})
+//     res.status(200).json(data)
+//    }
+//    catch(err){
+//   res.status(500).send(err.message);
 
-   }
-   
+//    }
+// })
 
+
+Router.get("/products/:id", async(req,res)=>{
+    const {id} = req.params.id;
+    try{
+        const data = await MyModel.findOne({"id": id})
+        res.status(200).json(data)
+    }
+    catch(error){
+        res.status(404).json(error.message)
+    }
 })
+
+
 export default Router
