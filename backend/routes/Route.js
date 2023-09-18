@@ -45,7 +45,9 @@ catch(err)
 Router.get("/products",async (req, res)=>{
     try{
         const data = await MyModel.find({})
+        // console.log(data, "mydata ")
         res.status(200).send(data);
+        
     }
     catch(err){
         console.log(err,"error occurs here")
@@ -68,9 +70,10 @@ Router.get("/products",async (req, res)=>{
 
 
 Router.get("/products/:id", async(req,res)=>{
-    const {id} = req.params.id;
+    const {id} = req.params;
     try{
-        const data = await MyModel.findOne({"id": id})
+        const data = await MyModel.findOne({id: id})
+        console.log(data, "data of model ")
         res.status(200).json(data)
     }
     catch(error){
