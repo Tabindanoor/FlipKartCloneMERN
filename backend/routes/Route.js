@@ -73,7 +73,7 @@ Router.get("/products/:id", async(req,res)=>{
     const {id} = req.params;
     try{
         const data = await MyModel.findOne({id: id})
-        console.log(data, "data of model ")
+        // console.log(data, "data of model ")
         res.status(200).json(data)
     }
     catch(error){
